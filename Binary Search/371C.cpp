@@ -46,7 +46,7 @@ int main(){
         }
     }
     int ans=0;
-    int left=0, right=1e14;
+    int left=0, right=200;
     while(left<=right){
         int mid=left+(right-left)/2;
         if(feasible(mid, rB, rS, rC, nB, nS, nC, pB, pS, pC, r)==true){
