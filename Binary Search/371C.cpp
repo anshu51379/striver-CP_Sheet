@@ -2,39 +2,16 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-bool feasible(int i, int rB, int rS, int rC, int nB, int nS, int nC, int pB, int pS, int pC, int r){
-    int nB_=rB*i-nB;
-    int nS_=rS*i-nS; 
-    int nC_=rC*i-nC;
-    if(nB_<0){
-        nB_=0;
-    }
-    if(nS_<0){
-        nS_=0;
-    }
-    if(nC_<0){
-        nC_=0;
-    }
-    int pB_=nB_*pB;
-    int pS_=nS_*pS;
-    int pC_=nC_*pC;
-    int total=pB_+pS_+pC_;
-    if(total<=r){
-        return true;
-    }else{
-        return false;
-    }
-    
-}
-int main(){
+#define int long long
+int32_t main(){
     string method;
     cin>>method;
     int nB, nS, nC;
     cin>>nB>>nS>>nC;
     int pB, pS, pC;
     cin>>pB>>pS>>pC;
-    int r;
-    cin>>r;
+    int money;
+    cin>>money;
     int rB=0, rS=0, rC=0;
     for(int i=0; i<method.size(); i+=1){
         if(method[i]=='B'){
@@ -45,16 +22,19 @@ int main(){
             rC+=1;
         }
     }
-    int ans=0;
-    int left=0, right=200;
+    int left=0, right=money+200;
     while(left<=right){
+        int tmp=0;
         int mid=left+(right-left)/2;
-        if(feasible(mid, rB, rS, rC, nB, nS, nC, pB, pS, pC, r)==true){
-            ans=mid;
+        int tB=max(rB*mid-nB, tmp);
+        int tS=max(rS*mid-nS, tmp);
+        int tC=max(rC*mid-nC, tmp);
+        int price=tB*pB+tS*pS+tC*pC;
+        if(price<=money){
             left=mid+1;
         }else{
             right=mid-1;
         }
     }
-    cout<<ans<<endl;
+    cout<<right<<endl;
 }
