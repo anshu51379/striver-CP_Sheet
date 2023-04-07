@@ -2,32 +2,27 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-int n=90000000;
-bool prime[90000001];
-vector<int> arr;
-void sieve(){
-	for(int i=2; i*i<=n; i++){
-		if(prime[i]==false){
-			for(int j=i*i; j<=n; j+=i){
-				prime[j]=true;
-			}
-		}
-	}
-	for(int i=2; i<=n; i++){
-		if(prime[i]==false){
-		    arr.push_back(i);
-		}
-	}
-}
+vector<int> prime;
+bool isPrime[100000005];
 int main(){
-  ios_base::sync_with_stdio(false); cin.tie(NULL);
-	sieve();
-	int tc;
-	cin>>tc;
-	while(tc--){
-		int n;
-		cin>>n;
-		cout<<arr[n-1]<<endl;
-	}
+    for(int i=3; i<=10000; i+=2){
+        if(isPrime[i]==0){
+            for(int j=i*i; j<=100000000; j+=i+i){
+                isPrime[j]=1;
+            }
+        }
+    }
+    prime.push_back(2);
+    for(int i=3;i<=100000000;i+=2){
+        if(isPrime[i]==0){
+            prime.push_back(i);
+        }
+    }
+    int tc;
+    cin>>tc;
+    while(tc--){
+        int n;
+        cin>>n;
+        cout<<prime[n-1]<<endl;
+    }
 }
- 
